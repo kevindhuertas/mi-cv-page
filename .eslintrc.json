@@ -1,3 +1,23 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    // Aquí puedes añadir o sobrescribir otras reglas de ESLint según tus preferencias
+    "quotes": ["error", "single"]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    // Ajusta esto según tu entorno (por ejemplo, si estás usando JSX o TypeScript)
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+  }
 }
+
