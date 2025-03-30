@@ -1,4 +1,3 @@
-// components/Header.tsx
 import React from 'react'
 import Button from './Button'
 import { MoonIcon, SunIcon, UserIcon } from '@heroicons/react/16/solid'
@@ -17,21 +16,21 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
   }
 
   return (
-    <header className="flex items-center justify-between p-4 border-b dark:border-gray-700">
+    <header className="flex items-center justify-between p-4">
       <div className="flex items-center gap-2">
         <UserIcon className="h-6 w-6 text-gray-700 dark:text-gray-200" />
-        <span
+        {/* <span
           // style={{ fontFamily: 'Papyrus, cursive' }}
           className="text-xl font-semibold text-gray-700 dark:text-gray-200"
         >
           KEVIN H.
-        </span>
+        </span> */}
       </div>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-1 md:gap-4">
         <Button
           onClick={() => {}}
-          bgColor="bg-gray-200"
-          hoverBgColor="hover:bg-gray-300"
+          bgColor="bg-gray-200 dark:bg-gray-700"
+          hoverBgColor="hover:bg-gray-300 dark:hover:bg-gray-500"
         >
           {translations.contact}
         </Button>

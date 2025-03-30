@@ -20,7 +20,7 @@ const TRANSLATIONS = {
         modalTitle: 'My Education',
       },
       personalProjects: {
-        title: 'Personal projects',
+        title: 'Projects',
         modalTitle: 'My Personal Projects',
       }
     }
@@ -43,7 +43,7 @@ const TRANSLATIONS = {
         modalTitle: 'Mi Educación',
       },
       personalProjects: {
-        title: 'Proyectos personales',
+        title: 'Proyectos',
         modalTitle: 'Mis Proyectos Personales',
       }
     }

@@ -31,6 +31,17 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      boxShadow: {
+        sm: '0 0 4px rgba(0, 0, 0, 0.1)',      // Sombra pequeña y uniforme
+        DEFAULT: '0 0 8px rgba(0, 0, 0, 0.1)', // Sombra predeterminada y uniforme
+        md: '0 0 12px rgba(0, 0, 0, 0.1)',     // Sombra mediana y uniforme
+        lg: '0 0 16px rgba(0, 0, 0, 0.1)',     // Sombra grande y uniforme
+        xl: '0 0 20px rgba(0, 0, 0, 0.1)',     // Sombra extra grande y uniforme
+        '2xl': '0 0 24px rgba(0, 0, 0, 0.1)',  // Sombra extra extra grande y uniforme
+        '3xl': '0 0 30px rgba(0, 0, 0, 0.1)',  // Sombra extra extra grande y uniforme
+        inner: 'inset 0 0 4px rgba(0, 0, 0, 0.06)', // Sombra interna (opcional)
+        none: 'none',
+      },
     },
   },
   plugins: [],

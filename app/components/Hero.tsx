@@ -8,7 +8,7 @@ const images = [
   // '/image3.png'
 ];
 
-const texts = ['Design', 'Build', 'Create'];
+const texts = ["Kevin"];
 
 const Hero = () => {
   const [index, setIndex] = useState(0);
@@ -21,7 +21,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <h1 className="text-[48px] md:text-[64px] 3xl:text-[96px] text-fg-primary font-medium p-10 overflow-hidden flex items-center h-[150px]">
+    <h1 className="text-[38px] md:text-[64px] 3xl:text-[96px] text-fg-primary font-medium max-md:p-10 overflow-hidden flex items-center h-[150px]">
       <span className="inline-block transition-all duration-300">{texts[index]}</span>
       <span className="inline-flex items-center overflow-hidden">
         <div className="overflow-visible max-md:h-[120px] h-[150px] flex items-center relative"
@@ -47,9 +47,9 @@ const Hero = () => {
         transition={{ duration: 0.5 }}
         className="w-[100px] h-[100px] md:w-[150px] md:h-[150px] ml-4"
       > */}
-        <Image src={images[index]} alt="Hero Image" width={100} height={100} className="object-contain" />
+        <Image src={images[index]} alt="Hero Image" width={80} height={80} className="object-contain p-1 m-2 md:p-2 md:m-4" />
       {/* </motion.div> */}
-      <span className="inline-block">like a pro</span>
+      <span className="inline-block duration-300">Huertas</span>
     </h1>
   );
 };
