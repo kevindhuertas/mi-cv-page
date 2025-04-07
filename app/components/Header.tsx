@@ -1,22 +1,22 @@
+'use client'
 import React from 'react'
 import Button from './Button'
 import { MoonIcon, SunIcon, UserIcon } from '@heroicons/react/16/solid'
 import { useLang } from '../context/LanguageProvider'
+import { useTheme } from '../context/ThemeContext'
 
 interface HeaderProps {
-  darkMode: boolean
-  toggleDarkMode: () => void
 }
 
-const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
+const Header: React.FC<HeaderProps> = () => {
   const { currentLanguage, setCurrentLanguage, translations } = useLang()
-
+  const { darkMode, toggleDarkMode } = useTheme();
   const handleLanguageChange = () => {
     setCurrentLanguage(currentLanguage === 'en' ? 'es' : 'en')
   }
 
   return (
-    <header className="flex items-center justify-between p-4">
+    <header className=" max-w-screen-2xl flex items-center justify-between p-4 w-full">
       <div className="flex items-center gap-2">
         <UserIcon className="h-6 w-6 text-gray-700 dark:text-gray-200" />
         {/* <span
@@ -34,14 +34,14 @@ const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
         >
           {translations.contact}
         </Button>
-        <Button onClick={toggleDarkMode} withBorder>
+        <Button onClick={toggleDarkMode}>
           {darkMode ? (
             <SunIcon className="h-6 w-6" />
           ) : (
             <MoonIcon className="h-6 w-6" />
           )}
         </Button>
-        <Button onClick={handleLanguageChange} withBorder>
+        <Button onClick={handleLanguageChange}>
           {currentLanguage === 'en' ? 'EN' : 'ES'}
         </Button>
       </div>
