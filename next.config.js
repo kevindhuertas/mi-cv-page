@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  trailingSlash: true,
   images: {
-    unoptimized: true,
+    unoptimized: true, // necesario si usas <Image> de next
   },
+  basePath: "/mypage", // nombre del repo
 };
 
 module.exports = nextConfig;
