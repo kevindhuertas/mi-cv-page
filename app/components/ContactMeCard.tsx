@@ -1,22 +1,24 @@
-import React, { useState } from 'react'
-import FlexibleCard from './FlexibleCard'
-import Image from 'next/image'
+import React, { useState } from "react";
+import FlexibleCard from "./FlexibleCard";
+import Image from "next/image";
 
 const ContactMeCard: React.FC = () => {
   const [formData, setFormData] = useState({
-    nombre: '',
-    asunto: '',
-    mensaje: ''
-  })
+    nombre: "",
+    asunto: "",
+    mensaje: "",
+  });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    console.log('Datos del formulario:', formData)
-  }
+    e.preventDefault();
+    console.log("Datos del formulario:", formData);
+  };
 
   return (
     <FlexibleCard>
@@ -27,7 +29,12 @@ const ContactMeCard: React.FC = () => {
 
           <ul className="space-y-2">
             <li className="flex items-center gap-2">
-              <Image src="/facebook.png" alt="Facebook" width={24} height={24} />
+              <Image
+                src="/facebook.png"
+                alt="Facebook"
+                width={24}
+                height={24}
+              />
               <span>Facebook</span>
             </li>
             <li className="flex items-center gap-2">
@@ -35,7 +42,12 @@ const ContactMeCard: React.FC = () => {
               <span>Twitter</span>
             </li>
             <li className="flex items-center gap-2">
-              <Image src="/linkedin.png" alt="LinkedIn" width={24} height={24} />
+              <Image
+                src="/linkedin.png"
+                alt="LinkedIn"
+                width={24}
+                height={24}
+              />
               <span>LinkedIn</span>
             </li>
           </ul>
@@ -53,7 +65,10 @@ const ContactMeCard: React.FC = () => {
             />
           </div>
 
-          <form onSubmit={handleSubmit} className="w-full max-w-sm flex flex-col space-y-2">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full max-w-sm flex flex-col space-y-2"
+          >
             <input
               type="text"
               name="nombre"
@@ -87,7 +102,7 @@ const ContactMeCard: React.FC = () => {
         </div>
       </div>
     </FlexibleCard>
-  )
-}
+  );
+};
 
-export default ContactMeCard
+export default ContactMeCard;

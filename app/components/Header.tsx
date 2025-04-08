@@ -1,19 +1,18 @@
-'use client'
-import React from 'react'
-import Button from './Button'
-import { MoonIcon, SunIcon, UserIcon } from '@heroicons/react/16/solid'
-import { useLang } from '../context/LanguageProvider'
-import { useTheme } from '../context/ThemeContext'
+"use client";
+import React from "react";
+import Button from "./Button";
+import { MoonIcon, SunIcon, UserIcon } from "@heroicons/react/16/solid";
+import { useLang } from "../context/LanguageProvider";
+import { useTheme } from "../context/ThemeContext";
 
-interface HeaderProps {
-}
+interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
-  const { currentLanguage, setCurrentLanguage, translations } = useLang()
+  const { currentLanguage, setCurrentLanguage, translations } = useLang();
   const { darkMode, toggleDarkMode } = useTheme();
   const handleLanguageChange = () => {
-    setCurrentLanguage(currentLanguage === 'en' ? 'es' : 'en')
-  }
+    setCurrentLanguage(currentLanguage === "en" ? "es" : "en");
+  };
 
   return (
     <header className=" max-w-screen-2xl flex items-center justify-between p-4 w-full">
@@ -28,7 +27,10 @@ const Header: React.FC<HeaderProps> = () => {
       </div>
       <div className="flex items-center gap-1 md:gap-4">
         <Button
-          onClick={() => {}}
+          onClick={() => {
+            const contactSection = document.getElementById("contact");
+            contactSection?.scrollIntoView({ behavior: "smooth" });
+          }}
           bgColor="bg-gray-200 dark:bg-gray-700"
           hoverBgColor="hover:bg-gray-300 dark:hover:bg-gray-500"
         >
@@ -42,11 +44,11 @@ const Header: React.FC<HeaderProps> = () => {
           )}
         </Button>
         <Button onClick={handleLanguageChange}>
-          {currentLanguage === 'en' ? 'EN' : 'ES'}
+          {currentLanguage === "en" ? "EN" : "ES"}
         </Button>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

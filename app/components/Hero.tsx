@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
-
+import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const images = [
-  '/meEmogi.png',
+  `/meEmogi.png`,
   // '/image÷2.png',
   // '/image3.png'
 ];
@@ -21,7 +20,13 @@ const Hero = () => {
   }, []);
 
   return (
-    <Image src={images[index]} alt="Hero Image" width={120} height={120} className="object-contain " />
+    <Image
+      src={process.env.NEXT_PUBLIC_BASE_PATH + images[index]}
+      alt="Hero Image"
+      width={120}
+      height={120}
+      className="object-contain "
+    />
     // <div className="flex items-center h-[150px] justify-center">
     //   <span className="inline-block transition-all duration-300">{texts[index]}</span>
     //   <span className="inline-flex items-center overflow-hidden">

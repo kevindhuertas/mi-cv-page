@@ -1,18 +1,18 @@
-import React from 'react'
-import Image from 'next/image'
+import React from "react";
+import Image from "next/image";
 
 interface FlexibleCardProps {
-  imageSrc?: string
-  imageAlt?: string
-  children?: React.ReactNode
-  onClick?: () => void
+  imageSrc?: string;
+  imageAlt?: string;
+  children?: React.ReactNode;
+  onClick?: () => void;
 }
 
 const FlexibleCard: React.FC<FlexibleCardProps> = ({
   imageSrc,
   imageAlt,
   children,
-  onClick
+  onClick,
 }) => {
   return (
     <div
@@ -23,18 +23,14 @@ const FlexibleCard: React.FC<FlexibleCardProps> = ({
       `}
     >
       {/* Si hay contenido (children), lo mostramos en la parte superior */}
-      {children && (
-        <div className="mb-4">
-          {children}
-        </div>
-      )}
+      {children && <div className="mb-4">{children}</div>}
 
       {/* Si hay una imagen, la mostramos al final (abajo) */}
       {imageSrc && (
         <div className="mt-auto flex justify-center">
           <Image
-            src={imageSrc}
-            alt={imageAlt ?? 'Card image'}
+            src={process.env.NEXT_PUBLIC_BASE_PATH + imageSrc}
+            alt={imageAlt ?? "Card image"}
             width={120}
             height={80}
             className="object-contain"
@@ -42,7 +38,7 @@ const FlexibleCard: React.FC<FlexibleCardProps> = ({
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default FlexibleCard
+export default FlexibleCard;
