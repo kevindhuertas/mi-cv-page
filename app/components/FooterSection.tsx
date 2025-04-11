@@ -29,12 +29,7 @@ const BubbleBackground = memo<BubbleBackgroundProps>(
 
     return (
       <>
-        {/* Estilos para acelerar la animación float existente */}
         <style jsx global>{`
-          /* Asegúrate que @keyframes float esté definido en tu CSS global */
-          .bubble-bursting span {
-            /* Sobreescribe SÓLO la duración cuando la clase está activa */
-            animation-duration: 0.8s !important; /* Duración rápida temporal */
           }
         `}</style>
         <div
@@ -66,7 +61,7 @@ const BubbleBackground = memo<BubbleBackgroundProps>(
 BubbleBackground.displayName = "BubbleBackground";
 
 const FooterSection = () => {
-  const { translations } = useLang();
+  const { text } = useLang();
   const [copied, setCopied] = useState(false);
   const [isBursting, setIsBursting] = useState(false);
   const email = "kevindhuertas@gmail.com";
@@ -105,13 +100,11 @@ const FooterSection = () => {
     <footer className="relative overflow-hidden w-full py-44 md:py-52 pt-72 md:pt-80 px-4 bg-slate-900 text-white text-center isolation-isolate">
       <BubbleBackground {...bubbleProps} isBursting={isBursting} />
 
-      {/* Contenido del Footer */}
       <div className="relative z-10">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium mb-8 md:mb-10">
-          {translations.contact}!
+          {text.contact}!
         </h2>
         <div className="flex gap-4 justify-center items-center flex-wrap">
-          {/* Email y Copiar */}
           <div className="flex items-center border border-gray-400 rounded-full px-4 py-2 bg-slate-800/50 backdrop-blur-md">
             <span className="text-sm">{email}</span>
             <button
@@ -124,11 +117,10 @@ const FooterSection = () => {
             </button>
             {copied && (
               <span className="ml-2 text-green-400 text-sm animate-pulse">
-                Copied!
+                {text.footer.copy}
               </span>
             )}
           </div>
-          {/* Sociales */}
           <div className="flex gap-2">
             <Button
               onClick={() =>
@@ -168,7 +160,7 @@ const FooterSection = () => {
         {/* Créditos */}
         <div className="mt-8 text-center text-xs text-gray-400">
           <p>
-            Made with{" "}
+            {text.footer.madeWith}
             <span role="img" aria-label="heart">
               ❤️
             </span>{" "}

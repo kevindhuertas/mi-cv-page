@@ -12,7 +12,28 @@ const CARD_FOLLOW_FACTOR_PX = 5;
 const CARD_HOVER_SCALE_FORWARD = 1.02;
 const CARD_HOVER_SCALE_BACKWARD = 0.98;
 
-const CardItem: React.FC<GalleryItem & { pushBackOnHover?: boolean }> = ({
+interface CardItemProps {
+  title: string;
+  text?: string;
+  info?: string;
+  tecnologies?: string;
+  year: string;
+  imageUrl: string;
+  appUrl?: string;
+  gitUrl?: string;
+  categorie: string;
+
+  pushBackOnHover?: boolean;
+  disableHoverAnimation?: boolean;
+  borderRadiusClass?: string;
+  cardClassName?: string;
+  imageStyle?: string;
+
+  id?: string;
+  onClick?: () => void;
+}
+
+const CardItem: React.FC<CardItemProps & { pushBackOnHover?: boolean }> = ({
   title,
   text,
   info,

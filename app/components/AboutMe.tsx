@@ -44,6 +44,7 @@ import {
   SiAmazondynamodb,
 } from "react-icons/si";
 import { IoLanguage, IoEllipsisVertical } from "react-icons/io5";
+import { useLang } from "../context/LanguageProvider";
 
 interface SkillBadgeProps {
   icon: React.ElementType;
@@ -67,6 +68,7 @@ const SkillBadge: React.FC<SkillBadgeProps> = ({
 const AboutMe = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { text } = useLang();
 
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
   const profileImageUrl = `${basePath}/me/kevinfoto.jpg`;
@@ -119,7 +121,7 @@ const AboutMe = () => {
   return (
     <section
       id="about-story-final"
-      className="relative py-20 md:py-28  text-gray-800 dark:text-gray-100 overflow-hidden"
+      className="relative py-20 md:py-28 text-gray-800 dark:text-gray-100 overflow-hidden"
     >
       <div
         ref={dropdownRef}
@@ -130,7 +132,7 @@ const AboutMe = () => {
           className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 text-white font-semibold rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-900"
         >
           <FaDownload />
-          <span>CV</span>
+          <span>{text.about.cvButton}</span>
           <IoEllipsisVertical className="ml-1" />
         </button>
         {isDropdownOpen && (
@@ -141,8 +143,7 @@ const AboutMe = () => {
               className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left"
               onClick={() => setIsDropdownOpen(false)}
             >
-              {" "}
-              <IoLanguage /> Español{" "}
+              <IoLanguage /> {text.about.cvDownloadEs}
             </a>
             <a
               href={`${basePath}/cv_en.pdf`}
@@ -150,8 +151,7 @@ const AboutMe = () => {
               className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left"
               onClick={() => setIsDropdownOpen(false)}
             >
-              {" "}
-              <IoLanguage /> English{" "}
+              <IoLanguage /> {text.about.cvDownloadEn}
             </a>
           </div>
         )}
@@ -164,26 +164,26 @@ const AboutMe = () => {
               <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-sky-400 dark:border-sky-500 transform transition-transform duration-500 hover:scale-103 z-10">
                 <Image
                   src={profileImageUrl}
-                  alt="Kevin Huertas"
+                  alt={text.about.altProfile}
                   layout="fill"
                   objectFit="cover"
                   priority
                 />
               </div>
-              <div className="absolute -bottom-8 -right-24 sm:-bottom-10 sm:-right-16 w-40 h-auto sm:w-44 z-20 transform rotate-12 filter grayscale transition-transform duration-300 hover:scale-110">
+              <div className="absolute -bottom-8 -right-24 sm:-bottom-10 sm:-right-16 w-40 h-auto sm:w-44 z-20 transform rotate-12 transition-transform duration-300 hover:scale-110">
                 <Image
                   src={skateImageUrl}
-                  alt="Activity GIF"
+                  alt={text.about.altActivity}
                   width={126}
                   height={52}
                   className="rounded-lg shadow-xl border-2 border-white dark:border-gray-800"
                   unoptimized={true}
                 />
               </div>
-              <div className="absolute top-0 -left-10 sm:-left-14 w-24 h-32 sm:w-28 sm:h-36 rounded-lg overflow-hidden shadow-xl transform -rotate-12 filter grayscale border-2 border-white dark:border-gray-800 z-0 transition-transform duration-300 hover:scale-110">
+              <div className="absolute top-0 -left-12 sm:-left-20 w-24 h-32 sm:w-28 sm:h-36 rounded-lg overflow-hidden shadow-xl transform -rotate-12 border-2 border-white dark:border-gray-800 z-0 hover:z-40 transition-transform duration-300 hover:scale-110">
                 <Image
                   src={coffeeImageUrl}
-                  alt="Interests"
+                  alt={text.about.altInterests}
                   layout="fill"
                   objectFit="cover"
                 />
@@ -196,11 +196,10 @@ const AboutMe = () => {
               Kevin Huertas
             </h1>
             <p className="text-xl sm:text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-600 dark:from-sky-400 dark:to-indigo-500 mb-8">
-              Ingeniero de Software
+              {text.about.title}
             </p>
             <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 italic my-8 px-4 max-w-xl mx-auto lg:mx-0 border-l-4 border-sky-200 dark:border-sky-800">
-              Me gusta descubrir lo que cada oportunidad enseña, encontrando
-              siempre algo curioso que ver y hacer.
+              {text.about.quote}
             </p>
             <div className="flex justify-center lg:justify-start space-x-6 mt-10">
               <a
@@ -210,7 +209,8 @@ const AboutMe = () => {
                 aria-label="GitHub"
                 className="text-gray-400 dark:text-gray-500 hover:text-gray-800 dark:hover:text-white transition-colors transform hover:scale-110"
               >
-                <FaGithub className="h-7 w-7" />
+                {" "}
+                <FaGithub className="h-7 w-7" />{" "}
               </a>
               <a
                 href="https://linkedin.com/in/kevindanielop"
@@ -219,14 +219,16 @@ const AboutMe = () => {
                 aria-label="LinkedIn"
                 className="text-gray-400 dark:text-gray-500 hover:text-sky-600 dark:hover:text-sky-500 transition-colors transform hover:scale-110"
               >
-                <FaLinkedin className="h-7 w-7" />
+                {" "}
+                <FaLinkedin className="h-7 w-7" />{" "}
               </a>
               <a
                 href="mailto:kevindhuertas@gmail.com"
                 aria-label="Email"
                 className="text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-500 transition-colors transform hover:scale-110"
               >
-                <FaEnvelope className="h-7 w-7" />
+                {" "}
+                <FaEnvelope className="h-7 w-7" />{" "}
               </a>
             </div>
           </div>
@@ -234,11 +236,11 @@ const AboutMe = () => {
 
         <div className="mb-20 md:mb-28 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 inline-block relative pb-2">
-            Mi Caja de Herramientas Digitales
+            {text.about.toolboxTitle}
             <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-2/3 h-0.5 bg-gradient-to-r from-sky-400 to-indigo-500 rounded-full"></span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-3xl mx-auto">
-            Mi set principal de herramientas que más he usado:
+            {text.about.toolboxIntroCore}
           </p>
           <div className="flex flex-wrap justify-center gap-4 mb-10 px-2">
             {coreSkills.map((skill) => (
@@ -246,7 +248,7 @@ const AboutMe = () => {
             ))}
           </div>
           <p className="text-md text-gray-500 dark:text-gray-400 mb-6">
-            Y otras tecnologías con las que me he familiarizado:
+            {text.about.toolboxIntroFamiliar}
           </p>
           <div className="flex flex-wrap justify-center gap-3 px-2 opacity-80">
             {familiarSkills.map((skill) => (
@@ -259,7 +261,7 @@ const AboutMe = () => {
           <div className="relative aspect-video md:aspect-[4/5] lg:aspect-square rounded-xl overflow-hidden shadow-xl order-2 md:order-1 group">
             <Image
               src={graduationImageUrl}
-              alt="Graduación USFQ"
+              alt={text.about.altGraduation}
               layout="fill"
               objectFit="cover"
               className="group-hover:scale-105 transition-transform duration-500 ease-in-out"
@@ -267,46 +269,46 @@ const AboutMe = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
             <div className="absolute bottom-4 left-4 text-white p-2 rounded bg-black/20 backdrop-blur-sm">
               <p className="font-semibold text-md lg:text-lg">
-                Ing. Ciencias de la Computación
+                {" "}
+                {text.about.educationDegree}{" "}
               </p>
               <p className="text-xs lg:text-sm opacity-90">
-                Universidad San Francisco de Quito
+                {" "}
+                {text.about.educationUniversity}{" "}
               </p>
             </div>
           </div>
           <div className="text-center md:text-left order-1 md:order-2">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-5">
-              Enfoque
+              {text.about.educationTitle}
             </h3>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
-              La universidad inspiró mi curiosidad por explorar nuevas
-              tecnologías, llevándome a estudiar por mi cuenta y a buscar
-              experiencias laborales desde temprano en mi carrera.
+              {text.about.educationDescription}
             </p>
             <div className="flex flex-wrap justify-center md:justify-start gap-3">
               <SkillBadge
                 icon={FaUserGraduate}
-                label="Autodidacta"
+                label={text.about.skillAutodidact}
                 iconColor="text-green-600 dark:text-green-400"
               />
               <SkillBadge
                 icon={FaRocket}
-                label="Iniciativa"
+                label={text.about.skillInitiative}
                 iconColor="text-blue-500 dark:text-blue-400"
               />
               <SkillBadge
                 icon={FaSearch}
-                label="Curiosidad"
+                label={text.about.skillCuriosity}
                 iconColor="text-yellow-600 dark:text-yellow-500"
               />
               <SkillBadge
                 icon={FaCode}
-                label="Resolución Problemas"
+                label={text.about.skillProblemSolving}
                 iconColor="text-orange-500 dark:text-orange-400"
               />
               <SkillBadge
                 icon={FaPaintBrush}
-                label="Atención al Detalle"
+                label={text.about.skillDetailOriented}
                 iconColor="text-purple-500 dark:text-purple-400"
               />
             </div>
@@ -315,34 +317,34 @@ const AboutMe = () => {
 
         <div className="text-center">
           <h3 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-8">
-            Más Allá de la Pantalla
+            {text.about.interestsTitle}
           </h3>
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 mb-4 text-gray-600 dark:text-gray-400">
             <div className="flex items-center gap-2 hover:text-sky-600 dark:hover:text-sky-400 transition-colors cursor-default">
               <IoLanguage className="h-6 w-6" />
-              <span>Español (Nativo)</span>
+              <span>{text.about.langSpanish}</span>
             </div>
             <div className="flex items-center gap-2 hover:text-sky-600 dark:hover:text-sky-400 transition-colors cursor-default">
               <IoLanguage className="h-6 w-6" />
-              <span>Inglés (B2)</span>
+              <span>{text.about.langEnglish}</span>
             </div>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 text-gray-600 dark:text-gray-400">
             <div className="flex items-center gap-2 hover:text-red-500 dark:hover:text-red-400 transition-colors cursor-default">
               <FaVideo className="h-5 w-5" />
-              <span>Producción Audiovisual</span>
+              <span>{text.about.interestAudiovisual}</span>
             </div>
             <div className="flex items-center gap-2 hover:text-green-600 dark:hover:text-green-500 transition-colors cursor-default">
               <FaChartLine className="h-5 w-5" />
-              <span>Cripto & Trading</span>
+              <span>{text.about.interestCrypto}</span>
             </div>
             <div className="flex items-center gap-2 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-default">
               <FaMountain className="h-6 w-6" />
-              <span>Montañismo</span>
+              <span>{text.about.interestMountain}</span>
             </div>
             <div className="flex items-center gap-2 hover:text-yellow-700 dark:hover:text-yellow-500 transition-colors cursor-default">
               <FaCoffee className="h-5 w-5" />
-              <span>Buen Café</span>
+              <span>{text.about.interestCoffee}</span>
             </div>
           </div>
         </div>

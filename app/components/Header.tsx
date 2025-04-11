@@ -8,7 +8,7 @@ import { useTheme } from "../context/ThemeContext";
 interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
-  const { currentLanguage, setCurrentLanguage, translations } = useLang();
+  const { currentLanguage, setCurrentLanguage, text } = useLang();
   const { darkMode, toggleDarkMode } = useTheme();
   const handleLanguageChange = () => {
     setCurrentLanguage(currentLanguage === "en" ? "es" : "en");
@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = () => {
           bgColor="bg-gray-200 dark:bg-gray-700"
           hoverBgColor="hover:bg-gray-300 dark:hover:bg-gray-500"
         >
-          {translations.contact}
+          {text.contact}
         </Button>
         <Button onClick={toggleDarkMode}>
           {darkMode ? (

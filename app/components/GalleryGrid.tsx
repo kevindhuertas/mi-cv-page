@@ -4,11 +4,12 @@ import React, { useState } from "react";
 import Masonry from "react-masonry-css";
 import CardItem from "./CardItem";
 import { GalleryItem } from "./GalleryPage";
-import Button from "./Button"; // Asegúrate que la ruta a tu componente Button sea correcta
+import Button from "./Button";
+import { useLang } from "../context/LanguageProvider";
 
-const LESS_HEIGHT_CLASS = "h-[460px]";
-const DEFAULT_HEIGHT_CLASS = "h-[500px]";
-const EXTRA_HEIGHT_CLASS = "h-[540px]";
+const LESS_HEIGHT_CLASS = "h-[480px]";
+const DEFAULT_HEIGHT_CLASS = "h-[530px]";
+const EXTRA_HEIGHT_CLASS = "h-[560px]";
 
 const breakpointColumnsObj = {
   default: 3,
@@ -22,20 +23,21 @@ type GalleryGridProps = {
   onCardClick?: (id: string) => void;
 };
 
-// Actualiza los tipos de categoría posibles
 type CategoryFilter = "all" | "work";
 
 const GalleryGrid: React.FC<GalleryGridProps> = ({
   cardData = [],
   onCardClick = (id: string) => {},
 }) => {
-  // Estado para almacenar la categoría seleccionada ("all" o "work")
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryFilter>("all");
+  const { text, currentLanguage } = useLang();
 
   if (!cardData || cardData.length === 0) {
     return (
-      <p className="text-center text-neutral-400 ">No items to display.</p>
+      <p className="text-center text-neutral-400 ">
+        {text.gallery.noItemsOverall}
+      </p>
     );
   }
 
@@ -73,9 +75,7 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
 
   return (
     <div>
-      {/* Contenedor de los botones de filtro */}
       <div className="flex justify-center space-x-4 mb-4">
-        {/* Botón "Todos" usando tu componente Button */}
         <Button
           onClick={() => handleFilterChange("all")}
           className={commonButtonClass}
@@ -88,13 +88,12 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
               ? activeHoverBgColor
               : inactiveHoverBgColor
           }
-          withBorder={false} // O ajusta según tu diseño preferido
-          disableHoverAnimation={false} // O según prefieras
+          withBorder={false}
+          disableHoverAnimation={false}
         >
-          Todos
+          {text.gallery.filters.all}
         </Button>
 
-        {/* Botón "Work" usando tu componente Button */}
         <Button
           onClick={() => handleFilterChange("work")}
           className={commonButtonClass}
@@ -112,7 +111,7 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
           withBorder={false}
           disableHoverAnimation={false}
         >
-          Work
+          {text.gallery.filters.work}
         </Button>
       </div>
 
@@ -125,21 +124,23 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
         >
           {filteredData.map((card: GalleryItem, index) => {
             const heightClass = getHeightClass(card);
+            const cardTexts =
+              card.translations[currentLanguage] || card.translations.en;
+
             return (
               <div
                 key={card.id || index}
                 className={`mb-2 ${heightClass} w-full`}
               >
                 <CardItem
-                  // Pasa todas las props relevantes
                   id={card.id}
-                  title={card.title}
-                  text={card.text}
-                  info={card.info}
-                  tecnologies={card.tecnologies}
+                  title={cardTexts.title}
+                  text={cardTexts.text}
+                  info={cardTexts.info}
+                  tecnologies={cardTexts.tecnologies}
                   year={card.year}
                   categorie={card.categorie}
-                  imageUrl={card.imageUrl || "/azuloscuro.jpg"}
+                  imageUrl={card.imageUrl}
                   appUrl={card.appUrl}
                   gitUrl={card.gitUrl}
                   pushBackOnHover={true}
@@ -153,7 +154,10 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
         </Masonry>
       ) : (
         <p className="text-center text-neutral-400 mt-8">
-          No hay elementos en la categoría "{selectedCategory}".
+          {text.gallery.noItemsInCategory.replace(
+            "{category}",
+            selectedCategory
+          )}
         </p>
       )}
     </div>
