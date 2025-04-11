@@ -162,6 +162,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             <Button
               onClick={handleAboutButtonClick}
               withBorder
+              bgColor="bg-gray-200 dark:bg-gray-700to-sky-50"
               className={`px-4 py-2 transition-transform duration-300 ease-out ${isShrunk ? "scale-90" : "scale-100"}`} // Encoge un poco el botón
             >
               {isAboutMeOpen ? text.hero.viewProjects : text.hero.aboutMe}

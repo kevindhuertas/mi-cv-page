@@ -63,8 +63,7 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
 
   // Define los estilos para los botones activos e inactivos usando las props de tu Button
   const commonButtonClass = "px-8 py-2 text-sm font-medium"; // Clases comunes de tamaño/fuente
-  const activeBgColor =
-    "bg-gradient-to-r from-indigo-400 via-sky-400 to-blue-400";
+  const activeBgColor = "bg-gradient-to-r from-indigo-400 to-sky-400";
 
   const activeTextColor = "text-white";
   const activeHoverBgColor = "bg-blue-700"; // Opcional: hover más oscuro para activo
