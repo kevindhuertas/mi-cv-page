@@ -14,7 +14,7 @@ const EXTRA_HEIGHT_CLASS = "h-[560px]";
 const breakpointColumnsObj = {
   default: 3,
   1400: 3,
-  700: 2,
+  700: 1,
   500: 1,
 };
 
@@ -47,26 +47,22 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
     return DEFAULT_HEIGHT_CLASS;
   };
 
-  // Filtra los datos basados en la categoría seleccionada
   const filteredData = cardData.filter((card) => {
     if (selectedCategory === "all") {
       return true;
     }
-    // Ahora también filtramos por "work" o cualquier otra categoría específica que añadas
     return card.categorie === selectedCategory;
   });
 
-  // Función para manejar el cambio de filtro
   const handleFilterChange = (category: CategoryFilter) => {
     setSelectedCategory(category);
   };
 
-  // Define los estilos para los botones activos e inactivos usando las props de tu Button
-  const commonButtonClass = "px-8 py-2 text-sm font-medium"; // Clases comunes de tamaño/fuente
+  const commonButtonClass = "px-8 py-2 text-sm font-medium";
   const activeBgColor = "bg-gradient-to-r from-indigo-400 to-sky-400";
 
   const activeTextColor = "text-white";
-  const activeHoverBgColor = "bg-blue-700"; // Opcional: hover más oscuro para activo
+  const activeHoverBgColor = "bg-blue-700";
 
   const inactiveBgColor = "bg-gray-200 dark:bg-gray-700";
   const inactiveTextColor = "text-gray-700 dark:text-gray-300";
@@ -114,7 +110,6 @@ const GalleryGrid: React.FC<GalleryGridProps> = ({
         </Button>
       </div>
 
-      {/* Grid de Masonry */}
       {filteredData.length > 0 ? (
         <Masonry
           breakpointCols={breakpointColumnsObj}

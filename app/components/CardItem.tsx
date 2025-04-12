@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { GalleryItem } from "./GalleryPage"; // Asegúrate que la ruta sea correcta
@@ -44,7 +44,7 @@ const CardItem: React.FC<CardItemProps & { pushBackOnHover?: boolean }> = ({
   gitUrl,
   disableHoverAnimation = false,
   pushBackOnHover = false,
-  borderRadiusClass = "rounded-lg",
+  borderRadiusClass = "rounded-xl",
   cardClassName = "bg-gray-100 dark:bg-gray-100",
   imageStyle = "object-contain",
 }) => {
@@ -53,7 +53,7 @@ const CardItem: React.FC<CardItemProps & { pushBackOnHover?: boolean }> = ({
   const [showInfo, setShowInfo] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
 
-  // --- Handlers (sin cambios respecto a la versión anterior) ---
+  // --- Handlers PC ---
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (disableHoverAnimation || !cardRef.current || showInfo) return;
     const rect = cardRef.current.getBoundingClientRect();
@@ -91,6 +91,32 @@ const CardItem: React.FC<CardItemProps & { pushBackOnHover?: boolean }> = ({
   const handleInfoContentClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 600px)");
+    if (mq.matches && cardRef.current) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setIsHovered(true);
+            } else {
+              setIsHovered(false);
+            }
+          });
+        },
+        {
+          root: null,
+          rootMargin: "-50% 0px -50% 0px",
+        }
+      );
+
+      observer.observe(cardRef.current);
+      return () => {
+        observer.disconnect();
+      };
+    }
+  }, []);
 
   const currentImageUrl = imageUrl || "/azuloscuro.jpg";
   const isGif =
@@ -161,7 +187,9 @@ const CardItem: React.FC<CardItemProps & { pushBackOnHover?: boolean }> = ({
       {/* Título como Mini-Tarjeta (Aparece en hover, no si info está visible) */}
       {title && !showInfo && (
         <div
-          className={`absolute top-4 left-4 transition-all duration-300 ease-in-out pointer-events-none ${"group-hover:opacity-100 group-hover:translate-y-0 opacity-0 -translate-y-2"} z-[2]`}
+          className={`absolute top-4 left-4 transition-all duration-300 ease-in-out pointer-events-none ${
+            isHovered ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
+          } z-[2]`}
         >
           <div className="bg-white dark:bg-neutral-800 px-3 py-1.5 rounded-md shadow-md">
             <h3 className="text-black dark:text-white text-sm md:text-base font-semibold">
@@ -175,8 +203,7 @@ const CardItem: React.FC<CardItemProps & { pushBackOnHover?: boolean }> = ({
       {!showInfo && (tecnologies || text || appUrl || gitUrl || year) && (
         <div
           className={`absolute bottom-4 left-4 right-4 flex flex-col items-start gap-2 transition-all duration-300 ease-in-out pointer-events-none ${
-            // right-4 limita ancho, flex-col apila verticalmente
-            "group-hover:opacity-100 group-hover:translate-y-0 opacity-0 translate-y-3"
+            isHovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
           } z-[2]`}
         >
           {/* Tecnologías (si existen) */}

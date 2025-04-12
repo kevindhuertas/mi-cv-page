@@ -138,16 +138,16 @@ const AboutMe = () => {
         {isDropdownOpen && (
           <div className="absolute right-0 mt-2 w-36 bg-white dark:bg-gray-800 rounded-md shadow-xl py-1 border border-gray-200 dark:border-gray-700">
             <a
-              href={`${basePath}/cv_es.pdf`}
-              download="Kevin_Huertas_CV_ES.pdf"
+              href={`${basePath}/me/KevinH_CV_ES.pdf`}
+              download={`KevinH_CV.pdf`}
               className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left"
               onClick={() => setIsDropdownOpen(false)}
             >
               <IoLanguage /> {text.about.cvDownloadEs}
             </a>
             <a
-              href={`${basePath}/cv_en.pdf`}
-              download="Kevin_Huertas_CV_EN.pdf"
+              href={`${basePath}/me/KevinH_CV_EN.pdf`}
+              download={`KevinH_CV.pdf`}
               className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left"
               onClick={() => setIsDropdownOpen(false)}
             >

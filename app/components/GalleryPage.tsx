@@ -97,7 +97,7 @@ const galleryItemsData: GalleryItem[] = [
     categorie: "work",
     imageStyle: "object-contain p-2 md:p-8 shadow-lg rounded-sm",
     imageUrl: "/projects/taskiapp.png",
-    isExtraHeight: true,
+    isLessHeight: true,
     translations: {
       es: {
         title: "Taski | Gestor de Tareas",
@@ -204,7 +204,7 @@ const galleryItemsData: GalleryItem[] = [
     categorie: "work",
     imageUrl: "/me/mineria2.JPG",
     imageStyle: "object-cover",
-    isLessHeight: true,
+    isExtraHeight: true,
     translations: {
       es: {
         title: "Proyecto Minería Cripto",

@@ -23,8 +23,8 @@ const Hero = () => {
     <Image
       src={process.env.NEXT_PUBLIC_BASE_PATH + images[index]}
       alt="Hero Image"
-      width={120}
-      height={120}
+      width={105}
+      height={105}
       className="object-contain "
     />
     // <div className="flex items-center h-[150px] justify-center">
